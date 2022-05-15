@@ -1,0 +1,78 @@
+{
+  "version": 1,
+  "author": "Fabrizio Carlassara",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "wokwi-pi-pico",
+      "id": "pico",
+      "top": 0,
+      "left": 0,
+      "attrs": { "builder": "pico-sdk" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led1",
+      "top": 97.16,
+      "left": -122.8,
+      "rotate": 270,
+      "attrs": { "color": "red" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led2",
+      "top": 116.94,
+      "left": -122.86,
+      "rotate": 270,
+      "attrs": { "color": "blue" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r1",
+      "top": 116.6,
+      "left": -70.91,
+      "attrs": { "value": "220" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r2",
+      "top": 135.86,
+      "left": -71.4,
+      "attrs": { "value": "220" }
+    },
+    {
+      "type": "wokwi-potentiometer",
+      "id": "pot1",
+      "top": -38.61,
+      "left": 136.88,
+      "rotate": 90,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-ntc-temperature-sensor",
+      "id": "ntc1",
+      "top": 58.48,
+      "left": 117.8,
+      "rotate": 180,
+      "attrs": {}
+    }
+  ],
+  "connections": [
+    [ "pico:GP0", "$serialMonitor:RX", "", [] ], 
+    [ "pico:GP1", "$serialMonitor:TX", "", [] ],
+    [ "r1:1", "led1:C", "green", [ "v0" ] ],
+    [ "led1:A", "pico:GP9", "green", [ "h0" ] ],
+    [ "pico:GND.3", "r1:2", "black", [ "h0" ] ],
+    [ "led2:A", "pico:GP10", "green", [ "h0" ] ],
+    [ "led2:C", "r2:1", "green", [ "h0" ] ],
+    [ "r1:2", "r2:2", "black", [ "v0" ] ],
+    [ "ntc1:VCC", "pico:3V3", "red", [ "h-18.08", "v-25.68" ] ],
+    [ "pot1:VCC", "pico:3V3", "red", [ "h-37.53", "v42.76" ] ],
+    [ "pico:GP28", "pot1:SIG", "blue", [ "h35.74", "v-66.58" ] ],
+    [ "pot1:GND", "pico:GND.8", "black", [ "h-47.84", "v34.94" ] ],
+    [ "ntc1:OUT", "pico:GP27", "blue", [ "h0" ] ],
+    [ "ntc1:GND", "pico:GND.6", "black", [ "h-16.02", "v16.87" ] ],
+    [ "pot1:VCC", "pir1:VCC", "red", [ "h-56.61", "v-12.54", "h-104.55", "v56.16" ] ],
+    [ "pir1:OUT", "pico:GP2", "green", [ "h0" ] ]
+  ]
+}
